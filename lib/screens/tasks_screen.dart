@@ -1,31 +1,29 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:todo_app/widgets/tasks_list.dart';
 import 'package:todo_app/screens/add_tasks_screen.dart';
+import 'package:provider/provider.dart';
+import 'package:todo_app/models/task_data.dart';
 class TasksScreen extends StatelessWidget {
-
-  // we can call this function by this way or as mentioned in show modal bottom method,
-  // Widget buildBottomSheet(BuildContext context){
-  //  return Container(
-    //);
-
-  //}
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.lightBlueAccent,
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.lightBlueAccent,
+        child:Icon(Icons.add),
         onPressed: () {   //new container with pop up
-          showModalBottomSheet(context: context, builder: (context)=> AddTaskScreen());
+          showModalBottomSheet(
+              context: context,
+              builder: (context)=> AddTaskScreen(),
+          );
         },
-        child: Icon(Icons.add),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Container(
-            padding: EdgeInsets.only(top: 60.0,left: 30.0,right:30,bottom: 30.0),
+            padding: EdgeInsets.only(
+                top: 60.0,left: 30.0,right:30,bottom: 30.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children:  <Widget>[
@@ -50,7 +48,7 @@ class TasksScreen extends StatelessWidget {
                 ),
                 ),
                 Text(
-                  '12 Tasks',
+                  '${Provider.of<TaskData>(context).taskCount} Tasks',
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 18.0,
@@ -67,8 +65,8 @@ class TasksScreen extends StatelessWidget {
                 borderRadius: BorderRadius.only(topLeft:Radius.circular(20.0),topRight:Radius.circular(20.0),
                 ),
               ),
-              child: Tasks_List(),
-                
+              child: TasksList(),
+
             ),
           ),
         ],
