@@ -3,7 +3,7 @@ import 'package:todo_app/models/task.dart';
 import 'dart:collection';
 
 class TaskData extends ChangeNotifier{
-  List<Task> _tasks=[
+  final  List<Task> _tasks=[
     Task(name: 'Buy milk'),
     Task(name:'Buy fruit'),
     Task(name:'Buy bread'),
@@ -19,5 +19,16 @@ class TaskData extends ChangeNotifier{
     final task =Task(name:newTaskTitle);
     _tasks.add(task);
     notifyListeners();
+  }
+
+  void updateTask(Task task){
+    task.toggleDone();
+    notifyListeners();
+
+  }
+  void deleteTask(Task task){
+    _tasks.remove(task);
+    notifyListeners();
+
   }
 }

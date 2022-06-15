@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:todo_app/models/task.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_app/models/task_data.dart';
-
+import 'package:todo_app/models/task_data.dart';
 class AddTaskScreen extends StatelessWidget {
+  static late String  newTaskTitle;
   @override
   Widget build(BuildContext context) {
-           late String  newTaskTitle;
+
     return Container(
       color :Color(0xff757575),
       child: Container(
@@ -33,7 +33,7 @@ class AddTaskScreen extends StatelessWidget {
               textAlign: TextAlign.center,
               onChanged: (newText){
                 newTaskTitle =newText;
-                },
+              },
               cursorColor: Colors.lightBlueAccent,
             ),
             SizedBox(height: 30,),
@@ -48,13 +48,12 @@ class AddTaskScreen extends StatelessWidget {
               color: Colors.lightBlueAccent,
               onPressed: ()
               {
-                final task= Task(name: newTaskTitle);
-                Provider.of<TaskData>(context).addTask(newTaskTitle);
+                Provider.of<TaskData>(context,listen :false).addTask(newTaskTitle);
                 Navigator.pop(context);
 
                 //Add our task to the list
-    //
-    },
+                //
+              },
             ),
           ],
         ),
